@@ -1,0 +1,143 @@
+================================================================================
+                    AI DRAMA STUDIO - CARA MENDAPATKAN ZIP
+================================================================================
+
+PROYEK SUDAH SIAP! Berikut cara mendapatkan file ZIP:
+
+================================================================================
+CARA 1: ZIP GENERATOR OTOMATIS (PALING MUDAH)
+================================================================================
+
+1. Jalankan aplikasi:
+   npm run dev
+
+2. Buka browser ke:
+   http://localhost:3000/zip-generator.html
+
+3. Klik tombol "📦 Download ZIP"
+
+4. File ZIP akan otomatis terdownload!
+
+================================================================================
+CARA 2: COMMAND LINE (Terminal/Command Prompt)
+================================================================================
+
+Windows (PowerShell):
+   Compress-Archive -Path .\* -DestinationPath ai-drama-studio.zip
+
+Windows (CMD dengan Git):
+   zip -r ai-drama-studio.zip . -x "node_modules/*" -x "dist/*"
+
+Mac/Linux:
+   zip -r ai-drama-studio.zip . -x "node_modules/*" -x "dist/*" -x ".git/*"
+
+================================================================================
+CARA 3: FILE MANAGER (Tanpa Command Line)
+================================================================================
+
+Windows:
+   1. Buka folder proyek
+   2. Ctrl+A (pilih semua)
+   3. Klik kanan → Send to → Compressed (zipped) folder
+   4. Rename menjadi ai-drama-studio.zip
+
+Mac:
+   1. Buka folder proyek
+   2. Klik kanan → Compress
+   3. Rename menjadi ai-drama-studio.zip
+
+================================================================================
+CARA 4: MENJALANKAN APLIKASI
+================================================================================
+
+Setelah mendapatkan ZIP atau langsung dari folder:
+
+1. Install dependencies:
+   npm install
+
+2. Jalankan development server:
+   npm run dev
+
+3. Buka browser:
+   http://localhost:3000
+
+4. Untuk production build:
+   npm run build
+   
+   File hasil build ada di folder dist/
+
+================================================================================
+FITUR APLIKASI
+================================================================================
+
+✓ Input karakter fleksibel dengan deskripsi bebas
+✓ Analisis karakter otomatis (ciri user vs AI)
+✓ Character Lock untuk konsistensi visual
+✓ Satu prompt video final utuh per scene
+✓ Durasi tepat 10 detik per scene
+✓ Dialog dengan timecode dan emosi
+✓ Kesinambungan cerita antar scene
+✓ Ekspor TXT & JSON
+✓ Validasi konsistensi otomatis
+✓ Regenerate scene individual
+✓ Mode Demo (tanpa API key)
+
+================================================================================
+STRUKTUR FILE PENTING
+================================================================================
+
+src/
+├── App.tsx                      - Komponen utama aplikasi
+├── main.tsx                     - Entry point React
+├── index.css                    - Styling Tailwind
+├── types.ts                     - TypeScript type definitions
+└── services/
+    ├── characterAnalyzer.ts     - Analisis karakter otomatis
+    ├── storyGenerator.ts        - Generator cerita & prompt video
+    ├── validator.ts             - Validasi konsistensi scene
+    └── storage.ts               - Penyimpanan & ekspor data
+
+public/
+├── zip-generator.html           - ZIP Generator otomatis
+└── download.html                - Halaman download
+
+dist/                            - Build output (production)
+
+================================================================================
+TEKNOLOGI
+================================================================================
+
+- React 18 + TypeScript
+- Tailwind CSS 4
+- Vite 6
+- Lucide React (icons)
+- UUID (unique IDs)
+
+================================================================================
+CATATAN PENTING
+================================================================================
+
+1. MODE DEMO: Aplikasi menggunakan template cerita, bukan AI generatif
+2. BAHASA: UI dalam Bahasa Indonesia, prompt video dalam Bahasa Inggris
+3. DURASI: Setiap scene tepat 10 detik
+4. KONSISTENSI: Character Lock menjaga identitas visual
+5. TANPA API KEY: Bisa langsung digunakan tanpa konfigurasi
+
+================================================================================
+BANTUAN
+================================================================================
+
+Jika ada masalah:
+1. Pastikan Node.js terinstall (versi 18+)
+2. Jalankan: npm install
+3. Jalankan: npm run dev
+4. Buka: http://localhost:3000
+
+Untuk ZIP generator:
+1. Jalankan: npm run dev
+2. Buka: http://localhost:3000/zip-generator.html
+3. Klik tombol download
+
+================================================================================
+                            AI DRAMA STUDIO - 2024
+================================================================================
