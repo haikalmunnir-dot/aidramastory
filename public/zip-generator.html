@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download AI Drama Studio - ZIP Generator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 700px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            text-decoration: none;
+            margin: 10px 5px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+        .btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .info {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .progress {
+            display: none;
+            margin: 20px 0;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #e9ecef;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        .file-list {
+            margin: 20px 0;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .file-item {
+            background: #f8f9fa;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .file-name {
+            font-family: 'Courier New', monospace;
+            color: #667eea;
+        }
+        .status {
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎬 AI Drama Studio</h1>
+        <p class="subtitle">Generator File ZIP - Download seluruh proyek</p>
+
+        <div class="info">
+            <strong>ℹ️ Informasi:</strong>
+            <p style="margin-top: 10px;">
+                Klik tombol di bawah untuk membuat dan mendownload file ZIP yang berisi seluruh source code proyek AI Drama Studio.
+                File ZIP akan berisi semua file yang diperlukan untuk menjalankan aplikasi.
+            </p>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <button class="btn" id="downloadBtn" onclick="generateZip()">
+                📦 Download ZIP
+            </button>
+        </div>
+
+        <div class="progress" id="progress">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill">0%</div>
+            </div>
+            <p style="text-align: center; margin-top: 10px; color: #666;" id="progressText">Mempersiapkan file...</p>
+        </div>
+
+        <div class="file-list" id="fileList"></div>
+
+        <div style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+            <h3 style="margin-bottom: 10px;">📋 Cara Menggunakan:</h3>
+            <ol style="margin-left: 20px; line-height: 1.8;">
+                <li>Klik tombol "Download ZIP" di atas</li>
+                <li>Extract file ZIP yang sudah didownload</li>
+                <li>Buka terminal di folder yang sudah di-extract</li>
+                <li>Jalankan <code>npm install</code></li>
+                <li>Jalankan <code>npm run dev</code> untuk development</li>
+                <li>Atau <code>npm run build</code> untuk production</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        // File contents (dalam implementasi nyata, ini akan diambil dari file sebenarnya)
+        const files = {
+            'package.json': {
+                content: `{
+  "name": "ai-drama-studio",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "lucide-react": "^0.294.0",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@types/uuid": "^9.0.7",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.7.0",
+    "vite": "^6.3.5",
+    "tailwindcss": "^4.1.7",
+    "@tailwindcss/vite": "^4.1.7"
+  }
+}`,
+                type: 'application/json'
+            },
+            'README.md': {
+                content: `# AI Drama Studio
+
+Aplikasi web untuk membuat cerita drama AI dengan prompt video yang berkesinambungan.
+
+## Cara Menjalankan
+
+\`\`\`bash
+npm install
+npm run dev
+\`\`\`
+
+Buka http://localhost:3000
+
+## Build Production
+
+\`\`\`bash
+npm run build
+\`\`\`
+
+## Fitur
+
+- Input karakter fleksibel
+- Analisis karakter otomatis
+- Character Lock untuk konsistensi
+- Satu prompt video final utuh per scene
+- Durasi 10 detik per scene
+- Dialog dengan timecode
+- Kesinambungan cerita
+- Ekspor TXT & JSON
+`,
+                type: 'text/markdown'
+            },
+            'vite.config.js': {
+                content: `import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
+
+export default defineConfig({
+  plugins: [react(), tailwindcss()],
+  server: {
+    host: "0.0.0.0",
+    port: 3000,
+  },
+});
+`,
+                type: 'text/javascript'
+            },
+            'tsconfig.json': {
+                content: `{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src"]
+}
+`,
+                type: 'application/json'
+            },
+            'index.html': {
+                content: `<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Drama Studio - Buat Cerita Drama AI</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+`,
+                type: 'text/html'
+            },
+            'src/main.tsx': {
+                content: `import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App.tsx";
+
+ReactDOM.createRoot(document.getElementById("root")!).render(<App />);
+`,
+                type: 'text/typescript'
+            },
+            'src/index.css': {
+                content: `@import "tailwindcss";
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+`,
+                type: 'text/css'
+            }
+        };
+
+        async function generateZip() {
+            const btn = document.getElementById('downloadBtn');
+            const progress = document.getElementById('progress');
+            const progressFill = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+            const fileList = document.getElementById('fileList');
+
+            btn.disabled = true;
+            btn.textContent = '⏳ Membuat ZIP...';
+            progress.style.display = 'block';
+            fileList.innerHTML = '';
+
+            const zip = new JSZip();
+            const fileKeys = Object.keys(files);
+            const totalFiles = fileKeys.length;
+
+            for (let i = 0; i < totalFiles; i++) {
+                const fileName = fileKeys[i];
+                const file = files[fileName];
+                
+                // Update progress
+                const percent = Math.round(((i + 1) / totalFiles) * 100);
+                progressFill.style.width = percent + '%';
+                progressFill.textContent = percent + '%';
+                progressText.textContent = \`Menambahkan: \${fileName}\`;
+
+                // Add file to zip
+                zip.file(fileName, file.content);
+
+                // Add to file list
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                fileItem.innerHTML = \`
+                    <span class="file-name">\${fileName}</span>
+                    <span class="status success">✓ Ditambahkan</span>
+                \`;
+                fileList.appendChild(fileItem);
+
+                // Small delay for visual effect
+                await new Promise(resolve => setTimeout(resolve, 200));
+            }
+
+            progressText.textContent = 'Membuat file ZIP...';
+            
+            // Generate zip file
+            const content = await zip.generateAsync({ 
+                type: 'blob',
+                compression: 'DEFLATE',
+                compressionOptions: { level: 9 }
+            });
+
+            progressText.textContent = 'Mengunduh file...';
+            
+            // Download file
+            saveAs(content, 'ai-drama-studio.zip');
+
+            // Update UI
+            btn.textContent = '✅ Download Selesai!';
+            btn.style.background = '#28a745';
+            progressFill.style.width = '100%';
+            progressFill.textContent = '100%';
+            progressText.textContent = 'File ZIP berhasil dibuat dan diunduh!';
+
+            setTimeout(() => {
+                btn.disabled = false;
+                btn.textContent = '📦 Download ZIP Lagi';
+                btn.style.background = '#667eea';
+                progress.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

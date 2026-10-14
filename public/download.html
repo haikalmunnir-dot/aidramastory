@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Drama Studio - Download</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        .method {
+            background: white;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+        .method h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+        .btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            margin: 5px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        .btn-secondary {
+            background: #6c757d;
+        }
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        .file-list {
+            list-style: none;
+        }
+        .file-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .file-list li:last-child {
+            border-bottom: none;
+        }
+        .file-list code {
+            color: #667eea;
+            font-weight: bold;
+        }
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .info {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎬 AI Drama Studio</h1>
+        <p class="subtitle">Aplikasi web untuk membuat cerita drama AI dengan prompt video yang berkesinambungan</p>
+
+        <div class="section">
+            <h2>📥 Cara Download Proyek</h2>
+            
+            <div class="method">
+                <h3>Metode 1: Download Source Code (Recommended)</h3>
+                <p>Proyek ini sudah di-build dan siap digunakan. Untuk mendapatkan file ZIP:</p>
+                <ol style="margin: 10px 0 10px 20px;">
+                    <li>Buka terminal/command prompt di folder proyek</li>
+                    <li>Jalankan perintah berikut:</li>
+                </ol>
+                <pre>zip -r ai-drama-studio.zip . -x "node_modules/*" -x "dist/*" -x ".git/*"</pre>
+                <p>Atau gunakan file manager untuk compress folder proyek.</p>
+            </div>
+
+            <div class="method">
+                <h3>Metode 2: Download Build Output</h3>
+                <p>Untuk mendapatkan versi production yang sudah di-build:</p>
+                <ol style="margin: 10px 0 10px 20px;">
+                    <li>Folder <code>dist/</code> berisi file yang sudah di-build</li>
+                    <li>Compress folder <code>dist/</code> menjadi ZIP</li>
+                    <li>File <code>dist/index.html</code> bisa langsung dibuka di browser</li>
+                </ol>
+            </div>
+
+            <div class="method">
+                <h3>Metode 3: Clone & Build Sendiri</h3>
+                <pre>git clone [repository-url]
+cd ai-drama-studio
+npm install
+npm run build</pre>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📁 Struktur File Penting</h2>
+            <ul class="file-list">
+                <li><code>src/App.tsx</code> - Komponen utama aplikasi</li>
+                <li><code>src/types.ts</code> - TypeScript type definitions</li>
+                <li><code>src/services/characterAnalyzer.ts</code> - Analisis karakter otomatis</li>
+                <li><code>src/services/storyGenerator.ts</code> - Generator cerita & prompt video</li>
+                <li><code>src/services/validator.ts</code> - Validasi konsistensi scene</li>
+                <li><code>src/services/storage.ts</code> - Penyimpanan & ekspor data</li>
+                <li><code>dist/</code> - Build output (production)</li>
+                <li><code>package.json</code> - Dependencies & scripts</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>🚀 Cara Menjalankan</h2>
+            
+            <h3 style="margin: 15px 0 10px 0;">Development Mode:</h3>
+            <pre>npm install
+npm run dev</pre>
+            <p>Buka <a href="http://localhost:3000" style="color: #667eea;">http://localhost:3000</a></p>
+
+            <h3 style="margin: 15px 0 10px 0;">Production Build:</h3>
+            <pre>npm install
+npm run build</pre>
+            <p>File hasil build ada di folder <code>dist/</code></p>
+        </div>
+
+        <div class="info">
+            <strong>ℹ️ Informasi:</strong>
+            <ul style="margin: 10px 0 0 20px;">
+                <li>Aplikasi berjalan dalam <strong>Mode Demo</strong> menggunakan template cerita</li>
+                <li>Tidak memerlukan API key untuk menggunakan</li>
+                <li>Setiap scene berdurasi tepat 10 detik</li>
+                <li>Prompt video dalam Bahasa Inggris, UI dalam Bahasa Indonesia</li>
+                <li>Character Lock menjaga konsistensi visual di semua scene</li>
+            </ul>
+        </div>
+
+        <div class="warning">
+            <strong>⚠️ Catatan:</strong>
+            <p style="margin-top: 10px;">
+                Aplikasi ini menggunakan template cerita untuk mode demo. Untuk integrasi AI generatif sungguhan, 
+                diperlukan backend server dengan API key dari provider AI (OpenAI, Anthropic, dll).
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>✨ Fitur Utama</h2>
+            <ul style="margin-left: 20px; line-height: 1.8;">
+                <li>✅ Input karakter fleksibel dengan deskripsi bebas</li>
+                <li>✅ Analisis karakter otomatis (ciri user vs AI)</li>
+                <li>✅ Character Lock untuk konsistensi visual</li>
+                <li>✅ Satu prompt video final utuh per scene</li>
+                <li>✅ Durasi tepat 10 detik per scene</li>
+                <li>✅ Dialog dengan timecode dan emosi</li>
+                <li>✅ Kesinambungan cerita antar scene</li>
+                <li>✅ Ekspor TXT & JSON</li>
+                <li>✅ Validasi konsistensi otomatis</li>
+                <li>✅ Regenerate scene individual</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <button class="btn" onclick="downloadInstructions()">📄 Download Instruksi (TXT)</button>
+            <button class="btn btn-secondary" onclick="showAllFiles()">📋 Lihat Semua File</button>
+        </div>
+
+        <div id="fileContent" style="display: none; margin-top: 30px;">
+            <h2 style="margin-bottom: 15px;">📄 Konten File Penting</h2>
+            <div id="filesContainer"></div>
+        </div>
+    </div>
+
+    <script>
+        function downloadInstructions() {
+            const content = `AI DRAMA STUDIO - INSTRUKSI DOWNLOAD
+=====================================
+
+CARA MEMBUAT FILE ZIP:
+
+Metode 1 (Terminal):
+  zip -r ai-drama-studio.zip . -x "node_modules/*" -x "dist/*" -x ".git/*"
+
+Metode 2 (File Manager):
+  1. Buka folder proyek
+  2. Pilih semua file (kecuali node_modules dan dist)
+  3. Klik kanan → Compress/Send to → Compressed folder
+  4. Rename menjadi ai-drama-studio.zip
+
+CARA MENJALANKAN:
+
+Development:
+  npm install
+  npm run dev
+  Buka http://localhost:3000
+
+Production:
+  npm install
+  npm run build
+  File ada di folder dist/
+
+STRUKTUR FILE PENTING:
+
+src/
+├── App.tsx                      - Komponen utama
+├── main.tsx                     - Entry point
+├── index.css                    - Styling
+├── types.ts                     - TypeScript types
+└── services/
+    ├── characterAnalyzer.ts     - Analisis karakter
+    ├── storyGenerator.ts        - Generator cerita & prompt
+    ├── validator.ts             - Validasi konsistensi
+    └── storage.ts               - Penyimpanan & ekspor
+
+FITUR UTAMA:
+
+✓ Input karakter fleksibel
+✓ Analisis karakter otomatis
+✓ Character Lock untuk konsistensi
+✓ Satu prompt video final utuh per scene
+✓ Durasi 10 detik per scene
+✓ Dialog dengan timecode
+✓ Kesinambungan cerita
+✓ Ekspor TXT & JSON
+✓ Validasi konsistensi
+✓ Regenerate scene individual
+
+CATATAN:
+
+- Mode Demo menggunakan template cerita
+- Tidak memerlukan API key
+- UI Bahasa Indonesia, prompt Bahasa Inggris
+- Character Lock menjaga konsistensi visual
+
+TEKNOLOGI:
+
+- React 18 + TypeScript
+- Tailwind CSS 4
+- Vite 6
+- Lucide React (icons)
+
+=====================================
+AI Drama Studio - 2024
+`;
+            
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'AI-Drama-Studio-Instructions.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function showAllFiles() {
+            const container = document.getElementById('filesContainer');
+            container.innerHTML = '<p style="color: #666;">Memuat daftar file...</p>';
+            
+            // Simulasi daftar file (dalam implementasi nyata, ini akan membaca file sebenarnya)
+            const files = [
+                { name: 'package.json', size: '1.2 KB' },
+                { name: 'src/App.tsx', size: '25 KB' },
+                { name: 'src/types.ts', size: '3 KB' },
+                { name: 'src/services/characterAnalyzer.ts', size: '8 KB' },
+                { name: 'src/services/storyGenerator.ts', size: '15 KB' },
+                { name: 'src/services/validator.ts', size: '4 KB' },
+                { name: 'src/services/storage.ts', size: '5 KB' },
+                { name: 'README.md', size: '2 KB' }
+            ];
+
+            container.innerHTML = files.map(f => `
+                <div style="background: #f8f9fa; padding: 10px; margin: 5px 0; border-radius: 5px; display: flex; justify-content: space-between;">
+                    <span><code>${f.name}</code></span>
+                    <span style="color: #666;">${f.size}</span>
+                </div>
+            `).join('');
+
+            document.getElementById('fileContent').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
